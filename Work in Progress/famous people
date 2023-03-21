@@ -1,0 +1,24 @@
+CREATE TABLE famous_people (ID INTEGER PRIMARY KEY, name TEXT, career_path);
+
+INSERT INTO famous_people VALUES (1, "Dwayne Johnson", "actor");
+INSERT INTO famous_people VALUES (2, "Adam Sandler", "actor", "Fifty First Dates", "romcoms", 56);
+INSERT INTO famous_people VALUES (3, "Zooey Deschanel", "actor");
+INSERT INTO famous_people VALUES (4, "Stephen King", "author", "IT", "horror", 75);
+INSERT INTO famous_people VALUES (5, "J R R Tolkien", "author", "The Hobbit", "fantasy", 81);
+INSERT INTO famous_people VALUES (6, "Sarah J Maas", "author", "A Court of Thorns and Roses", "fantasy", 36);
+INSERT INTO famous_people VALUES (8, "Jennifer Lopez", "actor", "Maid in Manhattan", "romcoms", 53);
+INSERT INTO famous_people VALUES (9, "Arnold Schwarzenegger", "actor", "Terminator", "action", 75);
+INSERT INTO famous_people VALUES (10, "Paul Rudd", "actor", "Ant Man", "comedy", 53);
+INSERT INTO famous_people VALUES (11, "Mary Shelley", "author", "Frankenstein", "horror", 53);
+
+
+
+CREATE TABLE famous_movies (id INTEGER PRIMARY KEY, title TEXT, lead TEXT, genre TEXT);
+
+INSERT INTO famous_movies (1, "Terminator", "Arnold Schwarzenegger", "action");
+INSERT INTO famous_movies (2, "Maid in Manhattan", "Jennifer Lopez", "romcom");
+INSERT INTO famous_movies (3, "Fifty First Dates", "Adam Sandler", "romcom");
+INSERT INTO famous_movies (4, "Jumanji: The Next Level", "Dwayne Johnson", "action");
+
+
+CREATE TABLE famous_books (id INTEGER PRIMARY KEY, title TEXT, author TEXT, genre TEXT);
