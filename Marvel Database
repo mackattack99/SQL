@@ -48,6 +48,9 @@ INSERT INTO marvels VALUES(24, "Venon", 78, "Neutral", "Male", 1.90, 118, "EUA",
 INSERT INTO marvels VALUES(25, "Juggernaut", 76, "Neutral", "Male", 2.87, 862, "EUA", 2, 7, 2, 7, 1, 4);
 INSERT INTO marvels VALUES(26, "Professor X", 58, "Good", "Male", 1.83, 86, "EUA", 5, 2, 2, 2, 5, 3);
 
+
+---basic queries
+
 SELECT * FROM marvels;
 SELECT gender, AVG(intelligence) FROM marvels group by gender;
 SELECT gender, max(strength) FROM marvels group by gender;
@@ -56,6 +59,9 @@ SELECT name FROM marvels WHERE intelligence>6 AND strength >6;
 SELECT gender, avg(strength), avg(fighting_Skills) FROM marvels group by gender;
 SELECT * from marvels ORDER BY popularity;
 SELECT hometown, name FROM marvels WHERE hometown="USA";
+
+
+---more advanced queries
 
 SELECT hometown, avg(durability) AS avg_durability from marvels 
     group by hometown
