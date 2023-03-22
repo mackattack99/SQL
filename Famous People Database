@@ -1,0 +1,52 @@
+/*Creating Database for Famous People; Joining Databases*/
+
+CREATE TABLE famous_actors (id INTEGER PRIMARY KEY, name TEXT, homestate TEXT, age INTEGER);
+
+INSERT INTO famous_actors VALUES (1, "Dwayne Johnson", "California", 50);
+INSERT INTO famous_actors VALUES (2, "Brad Pitt", "Oklahoma", 59);
+INSERT INTO famous_actors VALUES (3, "Angelina Jolie", "California", 47);
+INSERT INTO famous_actors VALUES (4, "Meryl Streep", "New Jersey", 73);
+INSERT INTO famous_actors VALUES (5, "Nicole Kidman", "Hawaii", 55);
+
+SELECT * FROM famous_actors;
+
+
+
+CREATE TABLE famous_movies (id INTEGER PRIMARY KEY, title TEXT, lead TEXT, genre TEXT);
+
+INSERT INTO famous_movies VALUES (1, "Maleficent", "Angelina Jolie", "fantasy");
+INSERT INTO famous_movies VALUES (2, "Mamma Mia", "Meryl Streep", "romcom");
+INSERT INTO famous_movies VALUES (3, "Jumanji: The Next Level", "Dwayne Johnson", "action");
+INSERT INTO famous_movies VALUES (4, "Fifty First Dates", "Adam Sandler", "romcom");
+INSERT INTO famous_movies VALUES (5, "Moulin Rouge", "Nicole Kidman", "drama");
+
+SELECT * FROM famous_movies;
+
+
+CREATE TABLE celebrity_experience (id INTEGER PRIMARY KEY, name TEXT, filmography INTEGER, award_recognitions INTEGER);
+
+INSERT INTO celebrity_experience VALUES (1, "Nicole Kidman", 64, 46);
+INSERT INTO celebrity_experience VALUES (2, "Adam Sandler", 55, 2);
+INSERT INTO celebrity_experience VALUES (3, "Angelina Jolie", 41, 16);
+INSERT INTO celebrity_experience VALUES (4, "Dwayne Johnson", 42, 0);
+INSERT INTO celebrity_experience VALUES (5, "Meryl Streep", 74, 97);
+
+SELECT * FROM celebrity_experience;
+
+
+SELECT famous_actors.name, famous_actors.homestate,famous_movies.title, famous_movies.genre FROM famous_actors
+    JOIN famous_movies
+    ON famous_actors.name=famous_movies.lead;
+    
+SELECT * from famous_actors
+    LEFT OUTER JOIN famous_movies
+    ON famous_actors.name=famous_movies.lead;
+    
+SELECT famous_actors.name, famous_actors.homestate, celebrity_experience.filmography, celebrity_experience.award_recognitions FROM famous_actors
+    JOIN celebrity_experience
+    ON famous_actors.name=celebrity_experience.name;
+
+SELECT famous_actors.name, famous_actors.age, celebrity_experience.filmography, celebrity_experience.award_recognitions FROM famous_actors
+    JOIN celebrity_experience
+    ON famous_actors.name=celebrity_experience.name
+    ORDER BY famous_actors.age desc;
