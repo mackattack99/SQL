@@ -12,13 +12,13 @@ SELECT * FROM famous_actors;
 
 
 
-CREATE TABLE famous_movies (id INTEGER PRIMARY KEY, title TEXT, lead TEXT, genre TEXT);
+CREATE TABLE famous_movies (id INTEGER PRIMARY KEY, title TEXT, lead TEXT, lead_id INTEGER, genre TEXT);
 
-INSERT INTO famous_movies VALUES (1, "Maleficent", "Angelina Jolie", "fantasy");
-INSERT INTO famous_movies VALUES (2, "Mamma Mia", "Meryl Streep", "romcom");
-INSERT INTO famous_movies VALUES (3, "Jumanji: The Next Level", "Dwayne Johnson", "action");
-INSERT INTO famous_movies VALUES (4, "Fifty First Dates", "Adam Sandler", "romcom");
-INSERT INTO famous_movies VALUES (5, "Moulin Rouge", "Nicole Kidman", "drama");
+INSERT INTO famous_movies VALUES (1, "Maleficent", "Angelina Jolie", 1, "fantasy");
+INSERT INTO famous_movies VALUES (2, "Mamma Mia", "Meryl Streep", 2,"romcom");
+INSERT INTO famous_movies VALUES (3, "Jumanji: The Next Level", "Dwayne Johnson", 3, "action");
+INSERT INTO famous_movies VALUES (4, "Fifty First Dates", "Adam Sandler", 4, "romcom");
+INSERT INTO famous_movies VALUES (5, "Moulin Rouge", "Nicole Kidman", 5, "drama");
 
 SELECT * FROM famous_movies;
 
@@ -50,3 +50,7 @@ SELECT famous_actors.name, famous_actors.age, celebrity_experience.filmography, 
     JOIN celebrity_experience
     ON famous_actors.name=celebrity_experience.name
     ORDER BY famous_actors.age desc;
+    
+SELECT famous_actors.name, famous_actors.age, famous_movies.title FROM famous_actors
+    LEFT OUTER JOIN famous_movies
+    ON famous_actors.id=famous_movies.lead_id;
