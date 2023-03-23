@@ -1,0 +1,48 @@
+SELECT * FROM BIT_DB.customers LIMIT 20;
+
+SELECT * FROM BIT_DB.JanSales LIMIT 20;
+
+SELECT * FROM BIT_DB.customers;
+
+SELECT * FROM BIT_DB.customers
+    WHERE length(order_id)=6
+    AND order_id<>'Order id';
+    
+--How many orders were placed in January?
+SELECT * FROM BIT_DB.JanSales;
+SELECT COUNT(orderid)
+    FROM BIT_DB.JanSales
+    WHERE length(orderid)=6 AND orderid<> 'Order ID';
+--Answer= 9681
+
+
+--How many of those orders were for an iPhone?
+--two answers; first
+SELECT COUNT(orderid) FROM BIT_DB.JanSales
+    WHERE length(orderid)=6 AND orderid<> 'Order ID' AND product = 'iPhone';
+--second,
+SELECT COUNT(product) FROM BIT_DB.JanSales
+    WHERE product='iPhone';
+
+--Answer=379
+
+
+--Select all the customer account numbers for orders placed in February.
+SELECT * FROM BIT_DB.FebSales;
+SELECT * FROM BIT_DB.customers;
+
+SELECT DISTINCT acctnum
+    FROM BIT_DB.customers cust
+    INNER JOIN BIT_DB.FebSales feb
+    ON cust.order_id=feb.orderid
+    WHERE length(cust.order_id)=6 AND cust.order_id<>'Order ID';
+
+--Which product was the cheapest one sold in January, and what was the price?
+SELECT * FROM BIT_DB.JanSales;
+SELECT distinct price, Product
+    FROM BIT_DB.JanSales
+    ORDER BY price asc LIMIT 1;
+
+--Answer= AAA Batteries (4-pack), 2.99
+
+--What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
