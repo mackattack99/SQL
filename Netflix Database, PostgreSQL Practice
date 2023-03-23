@@ -35,3 +35,11 @@ SELECT people.director
     ON titles.show_id=people.show_id
     WHERE titles.title='Bright Star';
 --Answer=Jane Campion
+
+-What is the oldest movie in the database and what year was it made?
+SELECT title, release_year
+    FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    WHERE type= 'Movie'
+    ORDER  BY release_year asc
+    LIMIT 1;
+--Answer: Prelude to War, 1942
