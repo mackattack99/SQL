@@ -45,4 +45,28 @@ SELECT distinct price, Product
 
 --Answer= AAA Batteries (4-pack), 2.99
 
+
 --What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
+SELECT * FROM BIT_DB.JanSales;
+SELECT sum(quantity)*price as revenue
+    FROM BIT_DB.JanSales
+    GROUP BY product;
+
+
+--Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+SELECT * FROM BIT_DB.FebSales;
+SELECT product, sum(quantity), sum(quantity)*price as total_revenue
+    FROM BIT_DB.FebSales
+    WHERE location='548 Lincoln St, Seattle, WA 98101';
+--Answer= AA Batteries (4-pack), 2, 7.68
+
+
+--How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+SELECT * FROM BIT_DB.FebSales;
+SELECT COUNT(distinct cust.acctnum), avg(quantity*price)
+    FROM BIT_DB.FebSales feb
+    LEFT JOIN BIT_DB.customers cust
+    ON feb.orderID=cust.order_id
+    WHERE feb.quantity>2
+    AND length(orderid)=6 AND orderid<>'Order ID';
+--Answer= 278 customers, 13.83 avg amount spent
