@@ -1,12 +1,17 @@
+--Using SQLite to query data from multiple tables regarding customer sales and information--
+
 SELECT * FROM BIT_DB.customers LIMIT 20;
 
 SELECT * FROM BIT_DB.JanSales LIMIT 20;
 
 SELECT * FROM BIT_DB.customers;
 
+
+--Cleaning the data
 SELECT * FROM BIT_DB.customers
     WHERE length(order_id)=6
     AND order_id<>'Order id';
+    
     
 --How many orders were placed in January?
 SELECT * FROM BIT_DB.JanSales;
@@ -27,6 +32,7 @@ SELECT COUNT(product) FROM BIT_DB.JanSales
 --Answer=379
 
 
+
 --Select all the customer account numbers for orders placed in February.
 SELECT * FROM BIT_DB.FebSales;
 SELECT * FROM BIT_DB.customers;
@@ -36,6 +42,8 @@ SELECT DISTINCT acctnum
     INNER JOIN BIT_DB.FebSales feb
     ON cust.order_id=feb.orderid
     WHERE length(cust.order_id)=6 AND cust.order_id<>'Order ID';
+    
+    
 
 --Which product was the cheapest one sold in January, and what was the price?
 SELECT * FROM BIT_DB.JanSales;
@@ -46,11 +54,13 @@ SELECT distinct price, Product
 --Answer= AAA Batteries (4-pack), 2.99
 
 
+
 --What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
 SELECT * FROM BIT_DB.JanSales;
 SELECT sum(quantity)*price as revenue
     FROM BIT_DB.JanSales
     GROUP BY product;
+    
 
 
 --Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
@@ -59,6 +69,7 @@ SELECT product, sum(quantity), sum(quantity)*price as total_revenue
     FROM BIT_DB.FebSales
     WHERE location='548 Lincoln St, Seattle, WA 98101';
 --Answer= AA Batteries (4-pack), 2, 7.68
+
 
 
 --How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
