@@ -1,0 +1,103 @@
+--Querying a dataset with information about the top 50 Spotify songs--
+
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+song_key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+song_mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness decimal(8,7) NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL );
+
+SELECT * FROM BIT_DB.Spotifydata;
+
+--What is the average "acoustiness" of the top 50 Spotify songs?
+
+SELECT avg(acousticness)
+    FROM BIT_DB.Spotifydata;
+--Answer=0.2538106
+    
+--What is the average "acoustiness" of the top 10 songs?
+
+SELECT avg(acousticness)
+    FROM BIT_DB.Spotifydata
+    WHERE id<11;
+--Answer= 0.259159
+
+--What is the average "danceability of Spotify top 50 songs?
+
+SELECT avg(danceability)
+    FROM BIT_DB.Spotifydata;
+--Answer= 0.68572
+
+--What is the average "danceability" of Olivia Rodrigo songs in the Spotify top 50?
+
+SELECT avg(danceability)
+    FROM BIT_DB.Spotifydata
+    WHERE artist_name= 'Olivia Rodrigo';
+--Answer=0.4865
+
+--How many Olivia Rodrigo songs in top 50?
+
+SELECT count(track_name)
+    FROM BIT_DB.Spotifydata
+    WHERE artist_name= 'Olivia Rodrigo';
+--Answer= 4
+
+--Which artist had the most songs in the top 50?
+
+SELECT artist_name, count(*) as count
+    FROM BIT_DB.Spotifydata
+    GROUP BY artist_name
+    ORDER BY count desc;
+--Answer= Doja Cat and Olivia Rodrigo both had 4 songs
+
+--What was the average danceability for songs with a loudness of greater than -5?
+
+SELECT avg(danceability)
+    FROM BIT_DB.Spotifydata
+    WHERE loudness>-5;
+--Answer= 0.750619
+
+--Average danceability for songs with a loudness of less than -5?
+
+SELECT avg(danceability)
+    FROM BIT_DB.Spotifydata
+    WHERE loudness<-5;
+--Answer= 0.638724
+
+--What was the average acousticness for songs with a loudness of greater than -5?
+
+SELECT avg(acousticness)
+    FROM BIT_DB.Spotifydata
+    WHERE loudness>-5;
+--Answer= 0.129297
+
+--Average acousticness for songs with a loudness of less than -5?
+
+SELECT avg(acousticness)
+    FROM BIT_DB.Spotifydata
+    WHERE loudness < -5;
+--Answer= 0.343976
+
+--Grouping songs by danceability.
+
+SELECT track_name, artist_name,
+    CASE
+    WHEN danceability < 0.600 THEN "not very danceable"
+    WHEN danceability < 0.800 THEN "kind of danceable"
+    ELSE "very danceable"
+    END AS "danceability_category"
+    FROM BIT_DB.Spotifydata
+    ORDER BY danceability_category;
