@@ -22,11 +22,15 @@ time_signature integer NOT NULL );
 
 SELECT * FROM BIT_DB.Spotifydata;
 
+
+
 --What is the average "acoustiness" of the top 50 Spotify songs?
 
 SELECT avg(acousticness)
     FROM BIT_DB.Spotifydata;
 --Answer=0.2538106
+
+
     
 --What is the average "acoustiness" of the top 10 songs?
 
@@ -35,11 +39,15 @@ SELECT avg(acousticness)
     WHERE id<11;
 --Answer= 0.259159
 
+
+
 --What is the average "danceability of Spotify top 50 songs?
 
 SELECT avg(danceability)
     FROM BIT_DB.Spotifydata;
 --Answer= 0.68572
+
+
 
 --What is the average "danceability" of Olivia Rodrigo songs in the Spotify top 50?
 
@@ -48,12 +56,16 @@ SELECT avg(danceability)
     WHERE artist_name= 'Olivia Rodrigo';
 --Answer=0.4865
 
+
+
 --How many Olivia Rodrigo songs in top 50?
 
 SELECT count(track_name)
     FROM BIT_DB.Spotifydata
     WHERE artist_name= 'Olivia Rodrigo';
 --Answer= 4
+
+
 
 --Which artist had the most songs in the top 50?
 
@@ -63,12 +75,15 @@ SELECT artist_name, count(*) as count
     ORDER BY count desc;
 --Answer= Doja Cat and Olivia Rodrigo both had 4 songs
 
+
+
 --What was the average danceability for songs with a loudness of greater than -5?
 
 SELECT avg(danceability)
     FROM BIT_DB.Spotifydata
     WHERE loudness>-5;
 --Answer= 0.750619
+
 
 --Average danceability for songs with a loudness of less than -5?
 
@@ -77,6 +92,7 @@ SELECT avg(danceability)
     WHERE loudness<-5;
 --Answer= 0.638724
 
+
 --What was the average acousticness for songs with a loudness of greater than -5?
 
 SELECT avg(acousticness)
@@ -84,12 +100,14 @@ SELECT avg(acousticness)
     WHERE loudness>-5;
 --Answer= 0.129297
 
+
 --Average acousticness for songs with a loudness of less than -5?
 
 SELECT avg(acousticness)
     FROM BIT_DB.Spotifydata
     WHERE loudness < -5;
 --Answer= 0.343976
+
 
 --Grouping songs by danceability.
 
@@ -101,3 +119,13 @@ SELECT track_name, artist_name,
     END AS "danceability_category"
     FROM BIT_DB.Spotifydata
     ORDER BY danceability_category;
+
+--Length of songs compared with popularity
+
+SELECT track_name, popularity, duration_ms
+    FROM BIT_DB.Spotifydata
+    WHERE duration_ms>200000;
+    
+SELECT track_name, popularity, duration_ms
+    FROM BIT_DB.Spotifydata
+    WHERE duration_ms<200000;
